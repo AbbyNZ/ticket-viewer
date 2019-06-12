@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Zendesk Ticket Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+
+    <div class="container-fluid">
+
+      <!-- List all the tickets. -->
+      <% tickets.forEach(function(ticket) {
+
+        var id = ticket.id;
+        var idWithHash = "#" + id;
+        var tags = "";
+        for(var i = 0; i < ticket.tags.length; i++)
+          tags += "#" + ticket.tags[i] + " ";
+      %>
+
+        <div class="ticketInfo row">
+          <div class="col-md-8">
+            <div><span class="subjectName">Ticket ID: </span><%= ticket.id %></div>
+            <div><span class="subjectName">Requester ID: </span><%= ticket.requester_id %></div>
+            <div><span class="subjectName">Subject: </span><%= ticket.subject %></div>
+            <div><span class="subjectName">Status: </span><%= ticket.status %></div>
+          </div>
+
+          <div class="col-md-2">
+            <button class="btn btn-primary view-ticket" id="<%= ticket.id %>" type="button">View Ticket Details</button>
+          </div>
+        </div>
+      <% }); %>
+
+      <div class="row">
+        <div class="col-md-2 text-center">
+          <button type="button" class="btn btn-primary" id="btnPrevious" <%= previousBtn %>>Previous</button>
+        </div>
+        <div class="col-md-8 text-center">
+          <%= tickets[0].id %> - <%= tickets[tickets.length-1].id %> of <%= count %> Tickets
+        </div>
+        <div class="col-md-2 text-center">
+          <button type="button" class="btn btn-primary" id="btnNext" <%= nextBtn %>>Next</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $("#btnPrevious").click(function(event){
+          $("#btnPrevious").html("Previous");
+          window.location = "/" + <%= parseInt(pageNo) - 1 %>;
+      });
+      $("#btnNext").click(function(event){
+          $("#btnNext").html("Next");
+          window.location = "/" + <%=  parseInt(pageNo) + 1 %>;;
+      });
+      $(".view-ticket").click(function(e) {
+          $(e.currentTarget).html("View Ticket");
+          window.location = "/ticket/" + e.currentTarget.id;
+      });
+    </script>
+  </body>
+</html>

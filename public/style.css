@@ -1,0 +1,20 @@
+html {
+  background: cream;
+}
+
+header {
+  background-color: black;
+  color: white;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#title {
+  text-align: center;
+}
+
+.ticketInfo {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 10px;
+}

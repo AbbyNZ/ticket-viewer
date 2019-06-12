@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zendesk Ticket Viewer</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+
+    <%
+        var stringTags = "";
+        for(var i = 0; i < ticket.tags.length; i++)
+            stringTags += ticket.tags[i] + " "
+    %>
+
+    <div class="container-fluid">
+
+      <div class="offset-md-2 col-md-8">
+        <div class="row">
+          <button class="button btn-primary navigation-button" id="backBtn"> Back </button>
+        </div>
+        <div class="card card-body">
+          <div class="row">
+            <div class="col-md-2">Ticket ID: </div>
+            <div class="col-md-10"><%= ticket.id %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Status: </div>
+            <div class="col-md-10"><%= ticket.status %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Requester ID: </div>
+            <div class="col-md-10"><%= ticket.requester_id %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Assignee ID: </div>
+            <div class="col-md-10"><%= ticket.assignee_id %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Subject: </div>
+            <div class="col-md-10"><%= ticket.subject %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Description: </div>
+            <div class="col-md-10"><%= ticket.description %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Tags: </div>
+            <div class="col-md-10"><%= stringTags %></div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">Created At: </div>
+            <div class="col-md-10"><%= tickets.created_at %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        $("#backBtn").click(function(event) {
+          $("#backBtn").html("Back");
+          window.history.go(-1);
+          return false;
+        });
+    </script>
+  </body>
+</html>
