@@ -1,6 +1,6 @@
 # Zendesk Ticket Viewer
 
-A ticket viewer for the Zendesk Ticket API. The application allows users to see the list of tickets and can view each ticket.
+A ticket viewer for Zendesk Ticket API. The application allows users to see the list of tickets and can view each ticket.
 
 # Requirements
 This application is using Node.js 10.15.3 and npm 6.4.1.
